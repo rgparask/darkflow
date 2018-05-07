@@ -38,7 +38,7 @@ def postprocess(self, net_out, im, save = True):
 	if type(im) is not np.ndarray:
 		imgcv = cv2.imread(im)
 	else: imgcv = im
-	h, w, _ = imgcv.shape
+	h, w = imgcv.shape
 	
 	resultsForJSON = []
 	for b in boxes:

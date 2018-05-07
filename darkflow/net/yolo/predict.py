@@ -5,6 +5,7 @@ import cv2
 import os
 import json
 from ...cython_utils.cy_yolo_findboxes import yolo_box_constructor
+from edgedetector import edgeDetector
 
 def _fix(obj, dims, scale, offs):
 	for i in range(1, 5):
@@ -17,7 +18,7 @@ def resize_input(self, im):
 	h, w, c = self.meta['inp_size']
 	imsz = cv2.resize(im, (w, h))
 	imsz = imsz / 255.
-	imsz = imsz[:,:,::-1]
+	imsz = imsz.reshape([h, w, c])
 	return imsz
 
 def process_box(self, b, h, w, threshold):
@@ -57,6 +58,7 @@ def preprocess(self, im, allobj = None):
 	"""
 	if type(im) is not np.ndarray:
 		im = cv2.imread(im)
+		im = edgeDetector.detectEdges(im)
 
 	if allobj is not None: # in training mode
 		result = imcv2_affine_trans(im)
@@ -68,7 +70,7 @@ def preprocess(self, im, allobj = None):
 			obj_1_ =  obj[1]
 			obj[1] = dims[0] - obj[3]
 			obj[3] = dims[0] - obj_1_
-		im = imcv2_recolor(im)
+		# im = imcv2_recolor(im)
 
 	im = self.resize_input(im)
 	if allobj is None: return im

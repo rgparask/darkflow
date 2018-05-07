@@ -17,7 +17,7 @@ def imcv2_recolor(im, a = .1):
 
 def imcv2_affine_trans(im):
 	# Scale and translate
-	h, w, c = im.shape
+	h, w = im.shape
 	scale = np.random.uniform() / 10. + 1.
 	max_offx = (scale-1.) * w
 	max_offy = (scale-1.) * h
@@ -28,4 +28,4 @@ def imcv2_affine_trans(im):
 	im = im[offy : (offy + h), offx : (offx + w)]
 	flip = np.random.binomial(1, .5)
 	if flip: im = cv2.flip(im, 1)
-	return im, [w, h, c], [scale, [offx, offy], flip]
+	return im, [w, h], [scale, [offx, offy], flip]
