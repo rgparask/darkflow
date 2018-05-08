@@ -58,7 +58,8 @@ def preprocess(self, im, allobj = None):
 	"""
 	if type(im) is not np.ndarray:
 		im = cv2.imread(im)
-		im = edgeDetector.detectEdges(im)
+		# im = edgeDetector.detectEdges(im)
+		im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 
 	if allobj is not None: # in training mode
 		result = imcv2_affine_trans(im)

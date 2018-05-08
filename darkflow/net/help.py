@@ -86,14 +86,14 @@ def camera(self):
     if file == 0:#camera window
         cv2.namedWindow('', 0)
         _, frame = camera.read()
-        # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame = edgeDetector.detectEdges(frame)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        # frame = edgeDetector.detectEdges(frame)
         height, width = frame.shape
         cv2.resizeWindow('', width, height)
     else:
         _, frame = camera.read()
-        # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame = edgeDetector.detectEdges(frame)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        # frame = edgeDetector.detectEdges(frame)
         height, width = frame.shape
 
     if SaveVideo:
@@ -118,8 +118,8 @@ def camera(self):
     while camera.isOpened():
         elapsed += 1
         _, frame = camera.read()
-        # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame = edgeDetector.detectEdges(frame)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        # frame = edgeDetector.detectEdges(frame)
         if frame is None:
             print ('\nEnd of Video')
             break
